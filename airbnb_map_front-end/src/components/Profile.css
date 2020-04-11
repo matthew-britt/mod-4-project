@@ -1,0 +1,33 @@
+#profile {
+  background-color: #ffffff;
+  position: absolute;
+  top: 128px;
+  left: 32px;
+  width: 256px;
+  border-radius: 10px;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+#profile-pic {
+  position: relative;
+  top: -64px;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+}
+
+#name{
+  position: relative;
+  top: -60px;
+  font-size: 1.5em;
+  color: #232323;
+}
+
+.name-bar{
+  position: relative;
+  top:-60px;
+  width: 254px;
+  height: 0px;
+  border: 1px solid #a5a5a5;
+}

@@ -9,8 +9,7 @@ class App extends React.Component {
       <div>
         <Map />
         <Profile />
-     </div>
-    
+      </div>
     );
   }
 }

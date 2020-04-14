@@ -22,33 +22,35 @@ class History extends React.Component {
     return (
       <div id='services'>
         <CloseButton closeButton={this.props.closeButton} />
-        <h2>{user.name}</h2>
-        <br />
-        <h3>Contact</h3>
-        <br />
-        <p>
-          phone: {user.phone}
+        <div className="content">
+          <h2>{user.name}</h2>
           <br />
-          email: {user.email}
-        </p>
-        <br />
-        <h3>Hours</h3>
-        <br />
-        <p>
-          monday: {user.hours.monday}
+          <h3>Contact</h3>
           <br />
-          tuesday: {user.hours.monday}
+          <p>
+            phone: {user.phone}
+            <br />
+            email: {user.email}
+          </p>
           <br />
-          wednesday: {user.hours.monday}
+          <h3>Hours</h3>
           <br />
-          thursday: {user.hours.monday}
-          <br />
-          friday: {user.hours.monday}
-          <br />
-          saturday: {user.hours.monday}
-          <br />
-          sunday: {user.hours.monday}
-        </p>
+          <p>
+            monday: {user.hours.monday}
+            <br />
+            tuesday: {user.hours.monday}
+            <br />
+            wednesday: {user.hours.monday}
+            <br />
+            thursday: {user.hours.monday}
+            <br />
+            friday: {user.hours.monday}
+            <br />
+            saturday: {user.hours.monday}
+            <br />
+            sunday: {user.hours.monday}
+          </p>
+          </div>
       </div>
     );
   }

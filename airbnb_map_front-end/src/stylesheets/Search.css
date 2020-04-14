@@ -1,0 +1,24 @@
+#search {
+  /* background-color: #ffffff;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.66);
+  height: 48px;
+  border-radius: 10px;
+  text-align: left; */
+  position: relative;
+  top: -72px;
+}
+
+#search > img{
+  height: 32px;
+  width: 32px;
+  padding-top: 8px;
+}
+
+#search > input{
+  vertical-align: text-bottom;
+  font-size: 16px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin-left: 8px;
+}

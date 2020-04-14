@@ -14,7 +14,7 @@ export class Map extends Component {
   constructor(props) {
     super(props)
 
-    this.zoom = 16
+    this.zoom = 12
 
     this.state = {
       lat: 30.2672,

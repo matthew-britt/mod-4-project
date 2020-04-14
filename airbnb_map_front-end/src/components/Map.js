@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withGoogleMap, GoogleMap } from 'react-google-maps'
 import { PlaceMarker } from './PlaceMarker'
-import './Map.css'
+import '../stylesheets/Map.css'
 
 const AirbnbMap = withGoogleMap(props => (
   <GoogleMap

@@ -12,3 +12,14 @@ h3 {
   position: relative;
   top: -128px;
 }
+
+#history > button {
+  position: relative;
+  top: 30px;
+  left: 100px;
+}
+
+#history > .content {
+  position: relative;
+  top: 48px;
+}

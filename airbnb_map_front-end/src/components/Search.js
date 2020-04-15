@@ -7,9 +7,11 @@ class Search extends React.Component {
   render() {
     return (
       <div id='search'>
-        <CloseButton closeButton={this.props.closeButton} />
-        <img src={mag} alt='search' />
-        <input type='search' name='search' />
+        <CloseButton className="exit-button" closeButton={this.props.closeButton} />
+        <div className="search-bar">
+          <img src={mag} alt='search' />
+          <input type='search' name='search' placeHolder="Search" />
+        </div>
       </div>
     );
   }

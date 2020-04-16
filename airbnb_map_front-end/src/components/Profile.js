@@ -8,15 +8,15 @@ import '../stylesheets/Profile.css';
 
 class Profile extends React.Component {
   state = {
-    settings: false,
     search: false,
     services: false,
     history: false,
+    user: {},
   };
 
-  openSettings = () => {
-    this.setState({ settings: !this.state.settings });
-  };
+  componentDidMount = () => {
+    this.fetchUser();
+  }
 
   handleSearch = () => {
     this.setState({ search: !this.state.search });
@@ -34,6 +34,12 @@ class Profile extends React.Component {
     this.setState({ [event.target.parentElement.id]: false });
   };
 
+  fetchUser = () => {
+    fetch('http://localhost:4000/api/users/1')
+      .then((resp) => resp.json())
+      .then(user => this.setState({ user }));
+  };
+
   render() {
     return (
       <div className='wrapper'>
@@ -44,7 +50,7 @@ class Profile extends React.Component {
             src={profile}
             alt='Profile'
           />
-          <div className='name'>Benjamin Sullivan</div>
+          <div className='name'>{this.state.user.name}</div>
           <hr className='name-bar' />
           <Menu
             handleSearch={this.handleSearch}
@@ -52,11 +58,6 @@ class Profile extends React.Component {
             handleServices={this.handleServices}
           />
         </div>
-        {this.state.settings ? (
-          <div className='blade'>
-            <div>Hello Settings</div>
-          </div>
-        ) : null}
         {this.state.search ? (
           <div className='blade'>
             <Search closeButton={this.closeButton} />
@@ -64,12 +65,12 @@ class Profile extends React.Component {
         ) : null}
         {this.state.history ? (
           <div className='blade'>
-            <History closeButton={this.closeButton} />
+            <History user={this.state.user} closeButton={this.closeButton} />
           </div>
         ) : null}
         {this.state.services ? (
           <div className='blade'>
-            <Services closeButton={this.closeButton} />
+            <Services user={this.state.user} closeButton={this.closeButton} />
           </div>
         ) : null}
       </div>

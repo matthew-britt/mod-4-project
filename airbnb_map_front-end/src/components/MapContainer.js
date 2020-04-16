@@ -7,6 +7,7 @@ export class MapContainer extends Component {
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
+    services: [],
   };
 
   onMarkerClick = (props, marker, e) =>
@@ -25,20 +26,28 @@ export class MapContainer extends Component {
     }
   };
 
-  displayMarkers = () => {
-    let myPlaces = [
-      [30.286798, -97.740457, 'Clock Tower'],
-      [30.277274, -97.727669, "Franklin's"],
-    ];
+  componentDidMount = () => {
+    this.fetchServices();
+  };
 
-    return myPlaces.map((p, index) => {
+  fetchServices = () => {
+    fetch('http://localhost:4000/api/services')
+      .then((resp) => resp.json())
+      .then((services) => this.setState({ services }));
+  };
+
+  displayMarkers = (services) => {
+    return services.map((p, index) => {
       return (
         <Marker
           key={index}
-          name={p[2]}
-          position={{ lat: p[0], lng: p[1] }}
+          name={p.name}
+          position={{ lat: p.latitude, lng: p.longitude }}
           onClick={this.onMarkerClick}
           pic={profile}
+          email={p.email}
+          owner={p.provided_by}
+          phone={p.phone}
         />
       );
     });
@@ -50,15 +59,28 @@ export class MapContainer extends Component {
         google={this.props.google}
         zoom={14}
         initialCenter={{ lat: 30.2672, lng: -97.7431 }}
+        ref='map'
       >
-        {this.displayMarkers()}
+        {this.displayMarkers(this.state.services)}
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
         >
           <div>
-            <h1>{this.state.selectedPlace.name}</h1>
-            <img src={this.state.selectedPlace.pic} style={{width: '100px'}} alt="Service" />
+            <h2>{this.state.selectedPlace.name}</h2>
+            <h4>owner: {this.state.selectedPlace.owner}</h4>
+            <h4>
+              email:{' '}
+              <a href={`mailto:${this.state.selectedPlace.email}`}>
+                {this.state.selectedPlace.email}
+              </a>
+            </h4>
+            <h4>phone: {this.state.selectedPlace.phone}</h4>
+            <img
+              src={this.state.selectedPlace.pic}
+              style={{ width: '100px' }}
+              alt='Service'
+            />
           </div>
         </InfoWindow>
       </Map>

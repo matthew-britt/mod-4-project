@@ -3,54 +3,46 @@ import CloseButton from './CloseButton';
 import '../stylesheets/History.css';
 
 class History extends React.Component {
-  render() {
-    let user = {
-      name: 'Lawn Service',
-      phone: '(555)555-5555',
-      email: 'ben@ben.com',
-      hours: {
-        monday: '8:00am-8:00pm',
-        tuesday: '8:00am-8:00pm',
-        wednesday: '8:00am-8:00pm',
-        thursday: '8:00am-8:00pm',
-        friday: '8:00am-8:00pm',
-        saturday: '8:00am-8:00pm',
-        sunday: '8:00am-8:00pm',
-      },
-    };
 
+  state = {
+    history: []
+  }
+
+  componentDidMount = () => {
+    this.fetchHistory(this.props.user.id);
+  };
+
+  fetchHistory = (userId) => {
+    fetch(`http://localhost:4000/api/users/${userId}/history`)
+      .then((resp) => resp.json())
+      .then((history) => this.setState({ history: history.slice(0, 3) }));
+  };
+
+  render() {
+    let spanStyles = {
+      color: 'red'
+    }
+    
     return (
       <div id='history'>
         <CloseButton closeButton={this.props.closeButton} />
-        <div className="content">
-          <h2>{user.name}</h2>
-          <br />
-          <h3>Contact</h3>
-          <br />
-          <p>
-            phone: {user.phone}
-            <br />
-            email: {user.email}
-          </p>
-          <br />
-          <h3>Hours</h3>
-          <br />
-          <p>
-            monday: {user.hours.monday}
-            <br />
-            tuesday: {user.hours.monday}
-            <br />
-            wednesday: {user.hours.monday}
-            <br />
-            thursday: {user.hours.monday}
-            <br />
-            friday: {user.hours.monday}
-            <br />
-            saturday: {user.hours.monday}
-            <br />
-            sunday: {user.hours.monday}
-          </p>
-        </div>
+        {this.state.history.map(service => {
+          return (
+              <div className='content' key={service.id}>
+                <h2>{service.name}</h2>
+                <br />
+                <h4>Contact</h4>
+                <span style={spanStyles}> Service Owner here </span>
+                <p>
+                  phone: {service.phone}
+                  <br />
+                  email: {service.email}
+                </p>
+                <br/>
+                <hr/>
+              </div>
+          )
+        })}
       </div>
     );
   }

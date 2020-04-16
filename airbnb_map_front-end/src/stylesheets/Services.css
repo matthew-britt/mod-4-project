@@ -13,10 +13,14 @@ h3 {
   top: -128px;
 }
 
+#services > .items {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
 #services > button {
   position: relative;
   top: 30px;
-  left: 100px;
 }
 
 #services > .content {

@@ -12,8 +12,9 @@
   font-family: 'Roboto', sans-serif;
   text-align: center;
   width: 256px;
-  height: 400px;
+  max-height: 400px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.66);
+  overflow: scroll;
 }
 
 .profile-pic {
@@ -39,10 +40,11 @@
 .blade{
   background-color: #ffffff;
   border-radius: 10px;
-  height: 100%;
   display: table-cell;
   font-family: 'Roboto', sans-serif;
   text-align: center;
   width: 256px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.66);
+  max-height: 100%;
+  overflow: scroll;
 }

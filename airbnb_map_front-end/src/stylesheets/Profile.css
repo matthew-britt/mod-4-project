@@ -48,3 +48,23 @@
   max-height: 100%;
   overflow: scroll;
 }
+
+button {
+  background-color: white;
+  border: solid;
+  border-radius: 10px;
+  color: red;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  transition-duration: 0.5s;
+}
+
+button:hover {
+  background-color: red;
+  border: solid white;
+  color: white;
+}

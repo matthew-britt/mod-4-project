@@ -10,6 +10,7 @@ h3 {
 
 #history{
   position: relative;
+  max-height: 400px;
   top: -128px;
 }
 
@@ -19,7 +20,7 @@ h3 {
   left: 100px;
 }
 
-#history > .content {
-  position: relative;
-  top: 48px;
+#history > .items {
+  overflow: hidden;
+  overflow-y: scroll;
 }

@@ -26,13 +26,16 @@ class History extends React.Component {
     return (
       <div id='history'>
         <CloseButton closeButton={this.props.closeButton} />
+        <h2>History</h2>
+        <br/>
+        <div className="items">
         {this.state.history.map(service => {
           return (
               <div className='content' key={service.id}>
                 <h2>{service.name}</h2>
                 <br />
                 <h4>Contact</h4>
-                <span style={spanStyles}> Service Owner here </span>
+                <span style={spanStyles}> {service.provided_by} </span>
                 <p>
                   phone: {service.phone}
                   <br />
@@ -43,6 +46,7 @@ class History extends React.Component {
               </div>
           )
         })}
+        </div>
       </div>
     );
   }

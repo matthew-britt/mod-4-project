@@ -45,12 +45,10 @@ class History extends React.Component {
   };
 
   closeNewService = () => {
-    console.log('CLOSE NEW SERVICE');
     this.setState({ newService: false });
   };
 
-  newService = () => {
-    console.log('NEW SERVICE');
+  displayNewService = () => {
     this.setState({ newService: true });
   };
 
@@ -92,19 +90,39 @@ class History extends React.Component {
     let buttonStyles = {
       paddingTop: '50px',
     };
+
+    let newService = 
+    <div>
+      <form>
+        <input type="text" id="name" defaultValue="Service Name"></input>
+        <input type="text" id="phone" defaultValue="Phone Number"></input>
+        <input type="text" id="email" defaultValue="Email Address"></input>
+        <br/>
+        <input type="submit" value="Submit Changes"></input>
+      </form>
+      <br />
+      <br />
+      <button onClick={() => this.closeNewService()}>Cancel Edits</button>
+    </div>
+
     return (
       <div id='services'>
         <CloseButton closeButton={this.props.closeButton} />
-        {this.displayServices(this.state.services)}
+        <h1>My Services</h1>
         <br />
-        <div style={buttonStyles}>
-          <button onClick={this.newService}>New Service</button>
+        <br />
+        <div className="items">
+          {this.state.newService ? (
+            <div>
+              {newService}
+            </div>
+          ) : (
+            <div>
+              {this.displayServices(this.state.services)}
+            </div>
+          )}
         </div>
-        {this.state.newService ? (
-          <div className='blade'>
-            <button onClick={() => this.closeNewService()}>Help</button>
-          </div>
-        ) : null}
+        <button className="newButton" onClick={this.displayNewService}>New Service</button>
       </div>
     );
   }

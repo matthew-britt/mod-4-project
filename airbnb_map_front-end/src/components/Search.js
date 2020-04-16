@@ -6,16 +6,17 @@ import '../stylesheets/Search.css';
 class Search extends React.Component {
   state = {
     categories: ['lawn service', 'dog walking', 'toilet paper', 'haircut'],
+    results: [],
   };
 
   componentDidMount = () => {
     this.fetchOptions();
-  }
+  };
 
   fetchOptions = () => {
-    // fetch(url for category list)
-    //   .then(resp => resp.json())
-    //   .then(categories => this.setState({ categories }))
+    fetch(`http://localhost:4000/api/categories`)
+      .then((resp) => resp.json())
+      .then((categories) => this.setState({ categories }));
   };
 
   createDropDown = (options) => {
@@ -25,10 +26,25 @@ class Search extends React.Component {
   };
 
   fetchResults = (event) => {
-    console.log(event.target.value)
-    // fetch(`http://localhost:4000/api/services/${event.target.value}`)
-    //   .then(resp => resp.json())
-    //   .then(category => console.log(category))
+    fetch(`http://localhost:4000/api/categories/${event.target.value}`)
+      .then((resp) => resp.json())
+      .then((results) => this.setState({ results: results.slice(0,3) }));
+  };
+
+  displayResults = (results) => {
+    return results.map((r, index) => {
+      return <div key={index}>
+        <h2>{r.name}</h2>
+        <p>
+          phone: {r.phone}
+          <br/>
+          email: {r.email}
+        </p> 
+        <hr/>
+        <br/>
+        <br/>
+      </div>
+    })
   }
 
   render() {
@@ -40,13 +56,14 @@ class Search extends React.Component {
           <br />
           <br />
           Find By Category
-          <br/>
-          <br/>
+          <br />
+          <br />
           <fieldset>
             <select id='category-dd' onChange={this.fetchResults}>
               {this.createDropDown(this.state.categories)}
             </select>
           </fieldset>
+          {this.displayResults(this.state.results)}
         </div>
       </div>
     );

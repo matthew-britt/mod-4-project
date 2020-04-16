@@ -6,6 +6,7 @@ class History extends React.Component {
   state = {
     services: [],
     newService: false,
+    editService: false,
   };
 
   componentDidMount = () => {
@@ -52,13 +53,21 @@ class History extends React.Component {
     this.setState({ newService: true });
   };
 
+  closeEditService = () => {
+    this.setState({ editService: false });
+  };
+
+  displayEditService = () => {
+    this.setState({ editService: true });
+  };
+
   displayServices = (services) => {
     return services.map((s) => {
       return (
         <div className='content' key={s.id}>
           <h2>{s.name}</h2>
           <br />
-          <h3>{this.props.user.name}</h3>
+          <h3>{s.user_id}</h3>
           <br />
           <p>
             phone: {s.phone}
@@ -68,7 +77,7 @@ class History extends React.Component {
           <br />
           <button
             onClick={() => {
-              this.editService(s);
+              this.displayEditService(s);
             }}
           >
             Edit
@@ -86,24 +95,44 @@ class History extends React.Component {
     });
   };
 
-  render() {
-    let buttonStyles = {
-      paddingTop: '50px',
-    };
+  handleEdit = (event) => {
+    window.alert('Editted successfully');
+  };
 
-    let newService = 
-    <div>
-      <form>
-        <input type="text" id="name" defaultValue="Service Name"></input>
-        <input type="text" id="phone" defaultValue="Phone Number"></input>
-        <input type="text" id="email" defaultValue="Email Address"></input>
-        <br/>
-        <input type="submit" value="Submit Changes"></input>
-      </form>
-      <br />
-      <br />
-      <button onClick={() => this.closeNewService()}>Cancel Edits</button>
-    </div>
+  handleSubmit = (event) => {
+    window.alert('Submitted successfully');
+  };
+
+  render() {
+    let newService = (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input type='text' id='name' defaultValue='Service Name'></input>
+          <input type='text' id='phone' defaultValue='Phone Number'></input>
+          <input type='text' id='email' defaultValue='Email Address'></input>
+          <br />
+          <input type='submit' value='Submit Changes'></input>
+        </form>
+        <br />
+        <br />
+        <button onClick={() => this.closeNewService()}>Cancel Edits</button>
+      </div>
+    );
+
+    let editService = (
+      <div>
+        <form onSubmit={this.handleEdit}>
+          <input type='text' id='name' defaultValue='Service Name'></input>
+          <input type='text' id='phone' defaultValue='Phone Number'></input>
+          <input type='text' id='email' defaultValue='Email Address'></input>
+          <br />
+          <input type='submit' value='Submit Changes'></input>
+        </form>
+        <br />
+        <br />
+        <button onClick={() => this.closeEditService()}>Cancel Edits</button>
+      </div>
+    );
 
     return (
       <div id='services'>
@@ -111,18 +140,20 @@ class History extends React.Component {
         <h1>My Services</h1>
         <br />
         <br />
-        <div className="items">
-          {this.state.newService ? (
-            <div>
-              {newService}
-            </div>
+        <div className='items'>
+          {this.state.newService || this.state.editService ? (
+            this.state.newService ? (
+              <div>{newService}</div>
+            ) : (
+              <div>{editService}</div>
+            )
           ) : (
-            <div>
-              {this.displayServices(this.state.services)}
-            </div>
+            <div>{this.displayServices(this.state.services)}</div>
           )}
         </div>
-        <button className="newButton" onClick={this.displayNewService}>New Service</button>
+        <button className='newButton' onClick={this.displayNewService}>
+          New Service
+        </button>
       </div>
     );
   }

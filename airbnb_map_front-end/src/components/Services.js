@@ -73,6 +73,8 @@ class History extends React.Component {
             phone: {s.phone}
             <br />
             email: {s.email}
+            <br />
+            price: {s.price}
           </p>
           <br />
           <button
